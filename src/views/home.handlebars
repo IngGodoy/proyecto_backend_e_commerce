@@ -1,0 +1,18 @@
+{{>header}}
+<h2>Lista de Productos:</h2>
+<div id="lista-productos">
+    {{#if products.length}}
+        {{#each products}}
+        <div class="product">
+            <p>producto: {{title}}</p>
+            <p>foto: {{thumbnail}}</p>
+            <p>Descriptión: {{description}}</p>
+            <p>Precio: $ {{price}}</p>
+            <p>Stock: {{stock}}</p>
+        </div>
+        {{/each}}
+    {{else}}
+        <p>No existen Podructos</p>
+    {{/if}}
+    
+</div>

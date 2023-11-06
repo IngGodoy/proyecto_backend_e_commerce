@@ -1,0 +1,27 @@
+h1{
+    color:blue;
+    text-align: center;
+}
+h2{
+    color:red;
+    text-align: center;
+}
+
+#lista-productos{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.product{
+  border: 1px solid #160707;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  width: 300px;
+}
+.product p {
+    text-align: center;
+}
