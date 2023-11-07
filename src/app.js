@@ -31,13 +31,16 @@ app.use("/api/carts",cartsRouter);
 const httpServer = app.listen(PORT, ()=> console.log("server ok on port: " + PORT));
 const socketServer = new Server(httpServer);
 
-socketServer.on("connection", (socket)=>{
+socketServer.on("connection", async (socket)=>{
     console.log("usuario conectado");
 
     socket.on("newProduct",(product)=>{
         console.log(product);
         productsManager.addProduct(product);
     });
+    
+    const products = await productsManager.getProducts();
+    socketServer.emit('arrayProducts', products);
 });
 
 

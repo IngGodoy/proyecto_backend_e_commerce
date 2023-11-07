@@ -18,8 +18,13 @@ router.get("/home", async (request,response)=>{
     };
 });
 
-router.get("/realtimeproducts", (request, response)=>{
-    response.render("realTimeProducts");
+router.get("/realtimeproducts", async (request, response)=>{
+   
+    try{
+        response.render("realTimeProducts");
+    }catch(error){
+        response.status(500).json(error.message);
+    };
 });
 
 

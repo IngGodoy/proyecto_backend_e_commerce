@@ -79,3 +79,11 @@ input[type="submit"] {
 input[type="submit"]:hover {
   background-color: #0056b3;
 }
+
+#list-products{
+  text-align: center;
+  background-color: #00ffe5;
+  padding: 12px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
