@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Router, request, response } from "express";
 import { ProductsManager} from "../manager/products.js";
 
 
@@ -15,9 +15,13 @@ router.get("/home", async (request,response)=>{
 
     }catch(error){
         response.status(500).json(error.message);
-    }
-
-    
+    };
 });
+
+router.get("/realtimeproducts", (request, response)=>{
+    response.render("realTimeProducts");
+});
+
+
 
 export default router;
