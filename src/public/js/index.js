@@ -35,4 +35,5 @@ socketClient.on('arrayProducts', (productsArray)=>{
         infoProducts += `Nombre Producto: ${product.title} - Precio: $${product.price} - Codigo: ${product.code} - Stock: ${product.stock} unidades </br> </br>`
     });
     products.innerHTML = infoProducts;
+    console.log("termine de actualizar") //borrar
 });
