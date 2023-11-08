@@ -33,13 +33,16 @@ const socketServer = new Server(httpServer);
 
 socketServer.on("connection", async (socket)=>{
     console.log("usuario conectado");
+    const products = await productsManager.getProducts();
 
-    socket.on("newProduct",(product)=>{
+    socket.on("newProduct", (product)=>{
         console.log(product);
         productsManager.addProduct(product);
+
+        socketServer.emit('arrayProducts', products);
+        
     });
     
-    const products = await productsManager.getProducts();
     socketServer.emit('arrayProducts', products);
 });
 
