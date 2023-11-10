@@ -6,6 +6,7 @@ import handlebars from "express-handlebars";
 import viewRouter from "./routes/views.router.js";
 import {Server} from "socket.io";
 import { ProductsManager} from "./manager/products.js";
+import fs from "fs";
 
 
 const productsManager = new ProductsManager();  
@@ -43,8 +44,10 @@ socketServer.on("connection", async (socket)=>{
         console.log("producto agregado en backend: ", product )
 
         const updateProducts = await productsManager.getProducts();
-        console.log("productos backend al frontend", updateProducts);
-        socket.emit('arrayProducts', updateProducts);
+        const copyUpdateProducts = [... updateProducts];
+        copyUpdateProducts.push(product);
+        console.log("productos backend al frontend", copyUpdateProducts);
+        socketServer.emit('arrayProducts', copyUpdateProducts);
     });
 
    
