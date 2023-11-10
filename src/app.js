@@ -20,7 +20,7 @@ app.use(express.static(__dirname  + "/public"));
 app.engine('handlebars', handlebars.engine());
 app.set('views', __dirname  + '/views');
 app.set('view engine', 'handlebars');
-app.use(express.urlencoded({extended:true})); //configurando Express para que analice y convierta los datos enviados desde un formulario HTML codificado en formato URL
+
 
 app.use('/', viewRouter);
 app.use("/realtimeproducts", viewRouter);
@@ -33,16 +33,21 @@ const socketServer = new Server(httpServer);
 
 socketServer.on("connection", async (socket)=>{
     console.log("usuario conectado");
-    const products = await productsManager.getProducts();
-
+    const readProducts = await productsManager.getProducts();
+    console.log("productos backend al frontend", readProducts);
+    socket.emit('connection', readProducts);
+    
     socket.on("newProduct", async (product)=>{
-        console.log(product);
-        productsManager.addProduct(product);
-        const updateProducts = await productsManager.getProducts();
-        socketServer.emit('arrayProducts', updateProducts);
         
+        productsManager.addProduct(product);
+        console.log("producto agregado en backend: ", product )
+
+        const updateProducts = await productsManager.getProducts();
+        console.log("productos backend al frontend", updateProducts);
+        socket.emit('arrayProducts', updateProducts);
     });
-    socket.emit('arrayProducts', products);
+
+   
 });
 
 

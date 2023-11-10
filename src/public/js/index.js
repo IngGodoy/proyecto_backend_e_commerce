@@ -27,9 +27,21 @@ form.onsubmit = (element) =>{
 
     socketClient.emit("newProduct", newPrduct);
     document.getElementById("form").reset();
+    
+    socketClient.on('arrayProducts', (productsArray)=>{
+        products.innerHTML = "";
+        let infoProducts = '';
+        console.log("productos del lado del front", productsArray); //borrar
+        productsArray.forEach(product=>{
+            infoProducts += `Nombre Producto: ${product.title} - Precio: $${product.price} - Codigo: ${product.code} - Stock: ${product.stock} unidades </br> </br>`
+        });
+        products.innerHTML = infoProducts;
+        
+    });
+
 };
 
-socketClient.on('arrayProducts', (productsArray)=>{
+socketClient.on('connection', (productsArray)=>{
     let infoProducts = '';
     productsArray.forEach(product=>{
         infoProducts += `Nombre Producto: ${product.title} - Precio: $${product.price} - Codigo: ${product.code} - Stock: ${product.stock} unidades </br> </br>`
@@ -37,3 +49,6 @@ socketClient.on('arrayProducts', (productsArray)=>{
     products.innerHTML = infoProducts;
     console.log("termine de actualizar") //borrar
 });
+
+
+ 

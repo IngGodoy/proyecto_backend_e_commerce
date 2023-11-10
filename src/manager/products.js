@@ -130,9 +130,6 @@ export class ProductsManager{
     
 };
 
-    
-
-
 
 
 
